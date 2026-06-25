@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "pluginId": "com.harborclient.plugins.timer",
+  "pluginVersion": "1.0.1",
+  "algorithm": "Ed25519",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "88ad380decbd9a1a6659c573833c96932dab32e7e0e88fa3353c98f758cd10b3"
+    },
+    {
+      "path": "dist/renderer.js",
+      "sha256": "510babde6a7538364b507ef96741e61fcfd3fe1fc839857e2d66bc9df52153ea"
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "c9129615a160cf49acc9c659183c5ee6619c6503142cf4f2aa97198b5dd9e69d"
+    },
+    {
+      "path": "package.json",
+      "sha256": "6eb98b9e23b58486622ec16390ba45efe91708a6ef4c93368e49c6b7a9809afb"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "41ce4e2f9ef8d31d65a784fa4fb2e92ec324be5065b54271c7e82c3d0de054e0"
+    },
+    {
+      "path": "README.md",
+      "sha256": "a08a7ce030dd68ae571df42b6e64f36dd96d6f5b04101a5ae0616980277e643b"
+    },
+    {
+      "path": "screenshot.png",
+      "sha256": "28649e350da4340729b262ef8e24da9c412cecadda55b709bd50b8cd76ce74b2"
+    },
+    {
+      "path": "scripts/plugin-sign.ts",
+      "sha256": "6646535c3a65cbcdc0f22e9176025e0f1eed4f48143ef4950e085dae06cad2c1"
+    },
+    {
+      "path": "scripts/plugin-verify.ts",
+      "sha256": "7f1f2407a2a8fac287d88e18f48db22d926c7de656c06143dd7baf3f30898620"
+    },
+    {
+      "path": "src/renderer.tsx",
+      "sha256": "fa24fd01f8cc943e6eecc96952f2388b32d874b12c3a232cee319bb0c67d95fe"
+    },
+    {
+      "path": "src/timerFields.test.ts",
+      "sha256": "f8942f6251d655411a75597ee9625103b67004050621d39f526b2dd50c71fbbb"
+    },
+    {
+      "path": "src/timerFields.ts",
+      "sha256": "7b7bacb5fc5aafd57d36fd1e3075603cec81b1438867b0a739870d1af1e169e3"
+    },
+    {
+      "path": "src/timerRuntime.ts",
+      "sha256": "6a34daa8d0fcd55b4769ee6728325f6156ddb8e42d2a65f212cb24e519d0a911"
+    },
+    {
+      "path": "src/timerSettings.ts",
+      "sha256": "63750d9bec6649b78ef92e4b0cb3a98f69c6a9185f63d778d2fe38c1062fc1ca"
+    },
+    {
+      "path": "src/TimerStatusBar.tsx",
+      "sha256": "ca436973091bea9ebd0f4f01ec99acdf2c2d6727fb1b0508ca957f651149b6d8"
+    },
+    {
+      "path": "src/TimerTab.tsx",
+      "sha256": "32385e76518658c30f443dfc1f4cc1f0078fc80b8792193c90b910dcd783d201"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "d96f30992a17200155752831b8b7118f775e408a26896d06e2d0d648de4ba5c8"
+    }
+  ],
+  "signature": "gvtG/DnJY13fB18+9MMvsc7VfP9ohpeCV1j8I1UfcYUlrYzTO/D2QzV9xUFKoK9fnCH0i5a2TgtF7sPeKyATAA=="
+}
