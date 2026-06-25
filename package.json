@@ -1,0 +1,18 @@
+{
+  "name": "@harborclient/plugin-interval",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/renderer.tsx --bundle --outfile=dist/renderer.js --format=esm --jsx=automatic --jsx-import-source=@harborclient/plugin-api --external:react --external:react-dom",
+    "dev": "esbuild src/renderer.tsx --bundle --outfile=dist/renderer.js --format=esm --jsx=automatic --jsx-import-source=@harborclient/plugin-api --external:react --external:react-dom --watch",
+    "test": "vitest run",
+    "pack": "pnpm build && zip -r ../harborclient-plugin-interval.hcp manifest.json README.md dist"
+  },
+  "devDependencies": {
+    "@harborclient/plugin-api": "^0.3.4",
+    "@types/react": "^19.1.2",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}
