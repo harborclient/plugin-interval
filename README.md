@@ -13,7 +13,7 @@ pnpm build
 
 In HarborClient: **Settings → Plugins → Load unpacked…** and select this directory.
 
-Requires HarborClient **>=1.8.0** with `hc.host.sendRequest` (`@harborclient/plugin-api` **>=0.3.3**).
+Requires HarborClient **>=1.8.0** with `hc.host.sendRequest` (`@harborclient/sdk` **>=0.4.3**).
 
 ## Development
 

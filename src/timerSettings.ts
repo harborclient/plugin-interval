@@ -1,4 +1,4 @@
-import type { RequestDraft } from "@harborclient/plugin-api";
+import type { RequestDraft } from "@harborclient/sdk";
 
 /**
  * Timer mode for scheduled sends.

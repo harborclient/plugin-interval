@@ -1,5 +1,5 @@
-import { installReact } from "@harborclient/plugin-api";
-import type { PluginContext } from "@harborclient/plugin-api";
+import { installReact } from "@harborclient/sdk";
+import type { PluginContext } from "@harborclient/sdk";
 import { TimerStatusBar } from "./TimerStatusBar";
 import { TimerTab } from "./TimerTab";
 import { clearAllTimers } from "./timerRuntime";

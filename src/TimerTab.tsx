@@ -4,11 +4,11 @@ import {
   useMemo,
   useRef,
   useState,
-} from "@harborclient/plugin-api/react";
+} from "@harborclient/sdk/react";
 import type {
   PluginContext,
   RequestTabContext,
-} from "@harborclient/plugin-api";
+} from "@harborclient/sdk";
 import { resolveOptionalPositiveInt, resolvePositiveInt } from "./timerFields";
 import { isTimerActive, startTimer, stopTimer } from "./timerRuntime";
 import {

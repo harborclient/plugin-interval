@@ -1,4 +1,4 @@
-import { substituteVariables } from "@harborclient/plugin-api/http";
+import { substituteVariables } from "@harborclient/sdk/http";
 
 const VARIABLE_PATTERN = /\{\{\s*[\w.-]+\s*\}\}/;
 

@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@harborclient+plugin-api@0.3.4_react@19.2.7/node_modules/@harborclient/plugin-api/dist/runtime/reactHost.js
+// node_modules/.pnpm/@harborclient+sdk@0.4.3_react@19.2.7/node_modules/@harborclient/sdk/dist/runtime/reactHost.js
 var hostReact = null;
 function setHostReact(react) {
   hostReact = react;
@@ -12,12 +12,12 @@ function requireHostReact() {
   return hostReact;
 }
 
-// node_modules/.pnpm/@harborclient+plugin-api@0.3.4_react@19.2.7/node_modules/@harborclient/plugin-api/dist/runtime/index.js
+// node_modules/.pnpm/@harborclient+sdk@0.4.3_react@19.2.7/node_modules/@harborclient/sdk/dist/runtime/index.js
 function installReact(react) {
   setHostReact(react);
 }
 
-// node_modules/.pnpm/@harborclient+plugin-api@0.3.4_react@19.2.7/node_modules/@harborclient/plugin-api/dist/runtime/react.js
+// node_modules/.pnpm/@harborclient+sdk@0.4.3_react@19.2.7/node_modules/@harborclient/sdk/dist/runtime/react.js
 function hook(name) {
   const react = requireHostReact();
   const fn = react[name];
@@ -118,8 +118,8 @@ function isTimerActive(id) {
   return timers.has(id);
 }
 
-// node_modules/.pnpm/@harborclient+plugin-api@0.3.4_react@19.2.7/node_modules/@harborclient/plugin-api/dist/runtime/jsx-runtime.js
-var Fragment = Symbol.for("@harborclient/plugin-api.Fragment");
+// node_modules/.pnpm/@harborclient+sdk@0.4.3_react@19.2.7/node_modules/@harborclient/sdk/dist/runtime/jsx-runtime.js
+var Fragment = Symbol.for("@harborclient/sdk.Fragment");
 function build(type, props, key) {
   const react = requireHostReact();
   const elementType = type === Fragment ? react.Fragment : type;
@@ -145,7 +145,7 @@ function TimerStatusBar() {
   return /* @__PURE__ */ jsx("span", { className: "text-[14px] text-text", role: "status", children: "Timer running" });
 }
 
-// node_modules/.pnpm/@harborclient+plugin-api@0.3.4_react@19.2.7/node_modules/@harborclient/plugin-api/dist/http/substitute.js
+// node_modules/.pnpm/@harborclient+sdk@0.4.3_react@19.2.7/node_modules/@harborclient/sdk/dist/http/substitute.js
 var VARIABLE_PATTERN = /\{\{\s*([\w.-]+)\s*\}\}/g;
 function substituteVariables(text, runtimeVars) {
   return text.replace(VARIABLE_PATTERN, (match, key) => {

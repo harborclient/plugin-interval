@@ -1,8 +1,8 @@
-import { useSyncExternalStore } from "@harborclient/plugin-api/react";
+import { useSyncExternalStore } from "@harborclient/sdk/react";
 import type {
   PluginContext,
   RequestTabContext,
-} from "@harborclient/plugin-api";
+} from "@harborclient/sdk";
 import {
   getActiveTimerCount,
   isTimerActive,
