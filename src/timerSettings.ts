@@ -1,9 +1,9 @@
-import type { RequestDraft } from "@harborclient/sdk";
+import type { RequestDraft } from '@harborclient/sdk';
 
 /**
  * Timer mode for scheduled sends.
  */
-export type TimerMode = "interval" | "delay";
+export type TimerMode = 'interval' | 'delay';
 
 /**
  * Persisted timer field values for a request fingerprint.
@@ -34,13 +34,13 @@ export interface TimerSettings {
  * Default timer settings shown for new requests.
  */
 export const defaultTimerSettings = (): TimerSettings => ({
-  mode: "interval",
-  intervalMs: "1000",
-  delayMs: "1000",
-  maxSends: "",
+  mode: 'interval',
+  intervalMs: '1000',
+  delayMs: '1000',
+  maxSends: ''
 });
 
-const STORAGE_PREFIX = "timer-settings:";
+const STORAGE_PREFIX = 'timer-settings:';
 
 /**
  * Builds a stable storage key from the request method and URL.
@@ -58,18 +58,17 @@ export function requestSettingsKey(draft: RequestDraft): string {
  * @param stored - Value returned from plugin storage, if any.
  */
 export function parseStoredTimerSettings(stored: unknown): TimerSettings {
-  if (!stored || typeof stored !== "object") {
+  if (!stored || typeof stored !== 'object') {
     return defaultTimerSettings();
   }
 
   const record = stored as Partial<TimerSettings>;
-  const mode = record.mode === "delay" ? "delay" : "interval";
+  const mode = record.mode === 'delay' ? 'delay' : 'interval';
 
   return {
     mode,
-    intervalMs:
-      typeof record.intervalMs === "string" ? record.intervalMs : "1000",
-    delayMs: typeof record.delayMs === "string" ? record.delayMs : "1000",
-    maxSends: typeof record.maxSends === "string" ? record.maxSends : "",
+    intervalMs: typeof record.intervalMs === 'string' ? record.intervalMs : '1000',
+    delayMs: typeof record.delayMs === 'string' ? record.delayMs : '1000',
+    maxSends: typeof record.maxSends === 'string' ? record.maxSends : ''
   };
 }

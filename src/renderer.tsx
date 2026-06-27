@@ -1,8 +1,8 @@
-import { installReact } from "@harborclient/sdk";
-import type { PluginContext } from "@harborclient/sdk";
-import { TimerStatusBar } from "./TimerStatusBar";
-import { TimerTab } from "./TimerTab";
-import { clearAllTimers } from "./timerRuntime";
+import { installReact } from '@harborclient/sdk';
+import type { PluginContext } from '@harborclient/sdk';
+import { TimerStatusBar } from './TimerStatusBar';
+import { TimerTab } from './TimerTab';
+import { clearAllTimers } from './timerRuntime';
 
 /**
  * Registers the Timer request tab and status bar indicator when the plugin activates.
@@ -14,19 +14,19 @@ export function activate(hc: PluginContext): void {
 
   hc.subscriptions.push(
     hc.ui.registerRequestTab({
-      id: "timer",
-      title: "Timer",
+      id: 'timer',
+      title: 'Timer',
       order: 50,
-      Component: ({ context }) => <TimerTab context={context} hc={hc} />,
+      Component: ({ context }) => <TimerTab context={context} hc={hc} />
     })
   );
 
   hc.subscriptions.push(
     hc.ui.registerStatusBarItem({
-      id: "timer-active",
-      alignment: "right",
+      id: 'timer-active',
+      alignment: 'right',
       order: 50,
-      Component: TimerStatusBar,
+      Component: TimerStatusBar
     })
   );
 }

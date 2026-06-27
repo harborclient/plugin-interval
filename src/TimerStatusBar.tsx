@@ -1,26 +1,5 @@
-import { useSyncExternalStore } from "@harborclient/sdk/react";
-import type {
-  PluginContext,
-  RequestTabContext,
-} from "@harborclient/sdk";
-import {
-  getActiveTimerCount,
-  isTimerActive,
-  stopTimer,
-  subscribeTimerRuntime,
-} from "./timerRuntime";
-
-interface Props {
-  /**
-   * Read-only request tab context from HarborClient.
-   */
-  context: RequestTabContext;
-
-  /**
-   * Renderer plugin context for status bar subscription.
-   */
-  hc: PluginContext;
-}
+import { useSyncExternalStore } from '@harborclient/sdk/react';
+import { getActiveTimerCount, subscribeTimerRuntime } from './timerRuntime';
 
 /**
  * Footer status indicator shown while at least one request timer is active.

@@ -84,7 +84,7 @@ export interface StartTimerOptions {
   /**
    * Scheduling mode.
    */
-  mode: "interval" | "delay";
+  mode: 'interval' | 'delay';
 
   /**
    * Delay or interval duration in milliseconds.
@@ -134,10 +134,10 @@ export function startTimer(options: StartTimerOptions): void {
         timers.delete(options.id);
         emitChange();
       }
-    },
+    }
   };
 
-  if (options.mode === "interval") {
+  if (options.mode === 'interval') {
     intervalId = setInterval(options.onTick, options.delayMs);
   } else {
     timeoutId = setTimeout(() => {

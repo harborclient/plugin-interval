@@ -1,4 +1,4 @@
-import { substituteVariables } from "@harborclient/sdk/http";
+import { substituteVariables } from '@harborclient/sdk/http';
 
 const VARIABLE_PATTERN = /\{\{\s*[\w.-]+\s*\}\}/;
 
@@ -38,17 +38,17 @@ export function resolvePositiveInt(
 ): ResolvedTimerField {
   const trimmed = raw.trim();
   if (!trimmed) {
-    return { error: "Value is required" };
+    return { error: 'Value is required' };
   }
 
   const resolved = substituteVariables(trimmed, variables);
   if (hasUnresolvedVariables(resolved)) {
-    return { error: "Unresolved variable placeholder" };
+    return { error: 'Unresolved variable placeholder' };
   }
 
   const parsed = Number(resolved);
   if (!Number.isInteger(parsed) || parsed <= 0) {
-    return { error: "Must be a positive integer" };
+    return { error: 'Must be a positive integer' };
   }
 
   return { value: parsed };
