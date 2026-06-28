@@ -4,6 +4,9 @@ Adds a **Timer** tab to the request editor for interval polling and one-shot del
 
 Use the timer plugin to re-send requests at regular intervals or after a delay. For instance, to refresh authentication tokens or check for new data.
 
+![Screenshot](screenshot.png)
+
+
 ## Install
 
 ```bash
