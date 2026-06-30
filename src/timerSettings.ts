@@ -1,4 +1,5 @@
 import type { RequestDraft } from '@harborclient/sdk';
+import { asRecord, oneOf, str } from '@harborclient/sdk/storage';
 
 /**
  * Timer mode for scheduled sends.
@@ -58,17 +59,15 @@ export function requestSettingsKey(draft: RequestDraft): string {
  * @param stored - Value returned from plugin storage, if any.
  */
 export function parseStoredTimerSettings(stored: unknown): TimerSettings {
-  if (!stored || typeof stored !== 'object') {
+  const record = asRecord(stored);
+  if (!record) {
     return defaultTimerSettings();
   }
 
-  const record = stored as Partial<TimerSettings>;
-  const mode = record.mode === 'delay' ? 'delay' : 'interval';
-
   return {
-    mode,
-    intervalMs: typeof record.intervalMs === 'string' ? record.intervalMs : '1000',
-    delayMs: typeof record.delayMs === 'string' ? record.delayMs : '1000',
-    maxSends: typeof record.maxSends === 'string' ? record.maxSends : ''
+    mode: oneOf(record.mode, ['interval', 'delay'] as const, 'interval'),
+    intervalMs: str(record.intervalMs, '1000'),
+    delayMs: str(record.delayMs, '1000'),
+    maxSends: str(record.maxSends, '')
   };
 }

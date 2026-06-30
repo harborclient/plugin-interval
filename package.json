@@ -1,10 +1,9 @@
 {
   "name": "@harborclient/plugin-interval",
-  "version": "1.0.5",
   "type": "module",
   "scripts": {
-    "build": "esbuild src/renderer.tsx --bundle --outfile=dist/renderer.js --format=esm --jsx=automatic --jsx-import-source=@harborclient/sdk --external:react --external:react-dom --alias:react/jsx-runtime=@harborclient/sdk/jsx-runtime --alias:react/jsx-dev-runtime=@harborclient/sdk/jsx-dev-runtime && pnpm verify:renderer",
-    "dev": "esbuild src/renderer.tsx --bundle --outfile=dist/renderer.js --format=esm --jsx=automatic --jsx-import-source=@harborclient/sdk --external:react --external:react-dom --alias:react/jsx-runtime=@harborclient/sdk/jsx-runtime --alias:react/jsx-dev-runtime=@harborclient/sdk/jsx-dev-runtime --watch",
+    "build": "node scripts/build.mjs && pnpm verify:renderer",
+    "dev": "node scripts/build.mjs --watch",
     "typecheck": "tsc --noEmit",
     "lint": "eslint --cache .",
     "format": "prettier --write .",
@@ -16,18 +15,14 @@
     "plugin:verify": "node --experimental-strip-types scripts/plugin-verify.ts"
   },
   "dependencies": {
-    "@harborclient/sdk": "^0.6.15"
+    "@harborclient/sdk": "^1.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
     "@types/node": "^26.0.1",
     "@types/react": "^19.1.2",
-    "esbuild": "^0.25.0",
     "eslint": "^10.5.0",
-    "eslint-config-prettier": "^10.1.8",
     "prettier": "^3.8.4",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.62.0",
     "vitest": "^3.2.4"
   }
 }

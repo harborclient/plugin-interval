@@ -2,7 +2,7 @@
   "id": "com.harborclient.plugins.timer",
   "name": "Timer",
   "author": "HarborClient",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "engines": { "harborclient": ">=1.8.0" },
   "renderer": "dist/renderer.js",
   "permissions": ["ui", "storage"],
