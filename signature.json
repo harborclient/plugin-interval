@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "pluginId": "com.harborclient.plugins.timer",
-  "pluginVersion": "1.0.4",
+  "pluginVersion": "1.0.5",
   "algorithm": "Ed25519",
   "files": [
     {
@@ -22,7 +22,7 @@
     },
     {
       "path": "dist/renderer.js",
-      "sha256": "093cbe5e0a54c11a7306a7c62b2fdfa235d94e997d627cd4177b8555be9c8eec"
+      "sha256": "73018c8e3a371accfc73423e1a4f06f837b8321d0b4e20201171ff3067ac3643"
     },
     {
       "path": "eslint.config.mjs",
@@ -30,15 +30,15 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "e36c18223de58efdcb2895c90d59d0e909aa6010dcf2565ff21f1520ebeb8c99"
+      "sha256": "1bdcb3fe559955b5fa0e784a71c1eafafaa5d28afc42667c2636923193b76cc3"
     },
     {
       "path": "package.json",
-      "sha256": "40f2b5594c671867a4c12bdd9268718db74c5f9d4867986784abcf72e3fb2bfc"
+      "sha256": "77e9fd275e3d9c8df9ab25765613b1258019bc05cc1af2907ce47a63fa464646"
     },
     {
       "path": "pnpm-lock.yaml",
-      "sha256": "a5d8e76ad31caf705854475eb0da6d9d40c6a74b0fd3dac98e1ac13693aeaaa2"
+      "sha256": "2bd2d1e9bbfb07b819a57baa72c414f24692ea6d1aa6433866751afa307a9c71"
     },
     {
       "path": "README.md",
@@ -101,5 +101,5 @@
       "sha256": "dced0ea880bec6222ac9856d3d2ce11b91fd874298f3129c8b5944606dc73668"
     }
   ],
-  "signature": "BMEL0SltowqB+dBWc8Lam8C/FxI9YCc8KfJExrSbdbeet4MsWlAMl+OqFZw3aiytfmPPCTKvQMj9o6ojzgAmCw=="
+  "signature": "glVIcH8KD78P/0yOXbIFDYThE5E8NOQyqNqiRLj1Wb1FjHNX4KcLeSc3Y5bihlEOXoyhPx4O+LkHEVEnlUDoAw=="
 }
