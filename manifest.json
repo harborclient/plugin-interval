@@ -2,18 +2,35 @@
   "id": "com.harborclient.plugins.interval",
   "name": "Interval",
   "author": "HarborClient",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "summary": "Adds a Timer tab to the request editor for interval polling and one-shot delayed sends.",
   "description": "README.md",
-  "categories": ["requests"],
+  "categories": [
+    "requests"
+  ],
   "screenshots": [
     "https://raw.githubusercontent.com/harborclient/plugin-interval/main/screenshot.png"
   ],
-  "engines": { "harborclient": ">=1.9.0" },
+  "engines": {
+    "harborclient": ">=1.9.0"
+  },
   "renderer": "dist/renderer.js",
-  "permissions": ["ui", "storage"],
+  "permissions": [
+    "ui",
+    "storage"
+  ],
   "contributes": {
-    "requestTabs": [{ "id": "timer", "title": "Timer" }],
-    "statusBarItems": [{ "id": "timer-active", "title": "Timer" }]
+    "requestTabs": [
+      {
+        "id": "timer",
+        "title": "Timer"
+      }
+    ],
+    "statusBarItems": [
+      {
+        "id": "timer-active",
+        "title": "Timer"
+      }
+    ]
   }
 }
