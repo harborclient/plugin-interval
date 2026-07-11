@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "pluginId": "com.harborclient.plugins.interval",
-  "pluginVersion": "1.0.9",
+  "pluginVersion": "1.0.10",
   "algorithm": "Ed25519",
   "files": [
     {
@@ -22,7 +22,7 @@
     },
     {
       "path": "dist/renderer.js",
-      "sha256": "06975c6dc75f04713b1e190bb8de9646bb86cf2525f2f5407e4249b642919bd0"
+      "sha256": "12f49ed34f60d46317ad8974220f507a1c217c9b9944d5ce2a1454141fad00f2"
     },
     {
       "path": "eslint.config.mjs",
@@ -30,15 +30,15 @@
     },
     {
       "path": "manifest.json",
-      "sha256": "e436e9d1fcebdb693b0c1b216a07784a8b27ff4f5c22ff767484c45c791829e4"
+      "sha256": "feb5868b2caddffdd3e8face658ab693ee84854ed1c2ef5eb515a96b9ab8255a"
     },
     {
       "path": "package.json",
-      "sha256": "5f82bf069e5a69caf4a3b9ed3d12d2e00f946d964855a40e452cfc1506ee89a4"
+      "sha256": "4409ece2da4d7f6858818e6cee8985d2ecc760ae6a2f59401242d6dce632a50c"
     },
     {
       "path": "pnpm-lock.yaml",
-      "sha256": "9a20ee5918c2a38e0a1401b63bd800f80360b535eb1ed6bf90dd49ba3878d11d"
+      "sha256": "492e2c31244579b7c34b8b500f1458211dbe1cf59e2b9df1a0e5ddd71fe5b26a"
     },
     {
       "path": "README.md",
@@ -50,7 +50,7 @@
     },
     {
       "path": "scripts/build.mjs",
-      "sha256": "b6184b7583f318543f8f3e6c3c3bf2eda7557d59a6e7ee89b4509d2b5d839434"
+      "sha256": "e3aa97a9cbd21b958f4ab53949a736d754817f32ce8224d1e2fa76ec382fbeb2"
     },
     {
       "path": "scripts/plugin-sign.ts",
@@ -62,15 +62,15 @@
     },
     {
       "path": "scripts/publish.sh",
-      "sha256": "272abe246e7b12684741a9eb3a26928ec7dd9a62ad4e26b95fa104c32d516412"
+      "sha256": "8a0a899d425d2d3c67f5560a54a92f080225fa022e70eac920f14c963f825c69"
     },
     {
       "path": "scripts/verify-renderer.ts",
-      "sha256": "7b9eb87c7dc2a04d927265b74d115cf349508a1bc86d5a22415c60bd5cfc88a8"
+      "sha256": "39db9da38152eec71ecff242b47f1f732298b3552f6373e928d6db346b703a45"
     },
     {
       "path": "src/renderer.tsx",
-      "sha256": "64cb4c32214333912abf6bf842a55de04c52d17e8208a991de1020aefeeb9161"
+      "sha256": "35f761df98dc3ec60e9e3130d59476340cc37c13030a9ce599a402d902d2f043"
     },
     {
       "path": "src/timerFields.test.ts",
@@ -102,5 +102,5 @@
     }
   ],
   "keyId": "com.harborclient.plugins.interval",
-  "signature": "CaBYUp+bknVr6wpP+61iN2Zos1gpo3DqROcO5AsDnuW95XVxj+3qLBusvIxX09yVIXtO9NwwtQf+N2XvEU7UAw=="
+  "signature": "xIKR/joiVwFENiTDof0sm/76AkZCghNF5RUr8v+ymXmSkjePg6HwPzI7SLSWc3Mhr7r05sIxFGSFwl2iYhl6AQ=="
 }

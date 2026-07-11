@@ -2,7 +2,7 @@
   "id": "com.harborclient.plugins.interval",
   "name": "Interval",
   "author": "HarborClient",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "summary": "Adds a Timer tab to the request editor for interval polling and one-shot delayed sends.",
   "description": "README.md",
   "categories": [
