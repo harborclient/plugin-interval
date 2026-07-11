@@ -1,4 +1,3 @@
-import { installReact } from '@harborclient/sdk';
 import type { PluginContext } from '@harborclient/sdk';
 import { TimerStatusBar } from './TimerStatusBar';
 import { TimerTab } from './TimerTab';
@@ -10,8 +9,6 @@ import { clearAllTimers } from './timerRuntime';
  * @param hc - Plugin API surface from HarborClient.
  */
 export function activate(hc: PluginContext): void {
-  installReact(hc.react);
-
   hc.subscriptions.push(
     hc.ui.registerRequestTab({
       id: 'timer',

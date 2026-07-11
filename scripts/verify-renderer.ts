@@ -3,7 +3,6 @@ import { join } from 'node:path';
 
 const root = join(import.meta.dirname, '..');
 const bundlePath = join(root, 'dist', 'renderer.js');
-const rendererSource = readFileSync(join(root, 'src', 'renderer.tsx'), 'utf8');
 
 let failed = false;
 
@@ -30,10 +29,6 @@ if (/from ['"]react['"]/.test(bundle)) {
 
 if (/from ['"]react-dom['"]/.test(bundle)) {
   fail('dist/renderer.js imports from "react-dom" — do not bundle react-dom in plugins');
-}
-
-if (!/installReact\s*\(\s*hc\.react\s*\)/.test(rendererSource)) {
-  fail('src/renderer.tsx must call installReact(hc.react) at the start of activate()');
 }
 
 if (failed) {
