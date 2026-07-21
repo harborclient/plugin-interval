@@ -1,4 +1,4 @@
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/runtime/reactHost.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/runtime/reactHost.js
 var HOST_REACT_GLOBAL_KEY = "__HARBORCLIENT_HOST_REACT__";
 var HOST_REACT_DOM_GLOBAL_KEY = "__HARBORCLIENT_HOST_REACT_DOM__";
 var hostReact = null;
@@ -46,7 +46,7 @@ function requireHostReactDom() {
   return hostReactDom;
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/runtime/react.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/runtime/react.js
 function hook(name) {
   const react = requireHostReact();
   const fn = react[name];
@@ -107,8 +107,24 @@ function useId() {
 function useLayoutEffect(effect, deps) {
   return hook("useLayoutEffect")(effect, deps);
 }
+function useReducer(reducer, initialArg, init) {
+  return hook("useReducer")(reducer, initialArg, init);
+}
 function createElement(type, props, ...children) {
   return hook("createElement")(type, props, ...children);
+}
+function memo(Component, propsAreEqual) {
+  let Memoized = null;
+  function LazyMemo(props) {
+    const react = requireHostReact();
+    if (Memoized === null) {
+      Memoized = react.memo(Component, propsAreEqual);
+    }
+    return react.createElement(Memoized, props);
+  }
+  const displayName = (typeof Component === "function" ? Component.displayName ?? Component.name : null) ?? "Component";
+  LazyMemo.displayName = `Memo(${displayName})`;
+  return LazyMemo;
 }
 var reactNamespace = {
   useState,
@@ -125,7 +141,9 @@ var reactNamespace = {
   useContext,
   useId,
   useLayoutEffect,
-  createElement
+  useReducer,
+  createElement,
+  memo
 };
 var defaultExport = new Proxy(reactNamespace, {
   get(target, prop, receiver) {
@@ -210,7 +228,7 @@ function isTimerActive(id) {
   return timers.has(id);
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/runtime/jsx-runtime.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/runtime/jsx-runtime.js
 var Fragment = Symbol.for("@harborclient/sdk.Fragment");
 function build(type, props, key) {
   const react = requireHostReact();
@@ -3506,12 +3524,12 @@ var getDefaultConfig = () => {
 };
 var twMerge = /* @__PURE__ */ createTailwindMerge(getDefaultConfig);
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/utils.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/utils.js
 function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/FieldError/index.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/FieldError/index.js
 function spacingClasses(spacing) {
   switch (spacing) {
     case "section":
@@ -3529,7 +3547,7 @@ function FieldError({ children, spacing = "field", roleAlert = true, className, 
   return jsx("p", { ...props, className: cn("hc-field-error text-[14px] text-danger", spacingClasses(spacing), className), role: roleAlert ? "alert" : void 0, children });
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/Button/index.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/Button/index.js
 var BUTTON_BASE = "inline-flex cursor-pointer items-center rounded-full app-no-drag";
 var VARIANT_CLASSES = {
   primary: cn(BUTTON_BASE, "min-h-[32px] justify-center border border-transparent bg-accent px-3 py-1 text-[15px] font-medium text-white shadow-sm hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"),
@@ -3544,27 +3562,27 @@ function Button({ variant = "primary", className, type = "button", innerRef, ...
   return jsx("button", { ref: innerRef, type, className: cn("hc-button", VARIANT_CLASSES[variant], className), ...props });
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/forms/classes.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/forms/classes.js
 var fieldFrame = "overflow-hidden rounded-lg border border-separator bg-field";
-var field = "rounded-lg border border-separator bg-field px-2.5 py-1.5 text-[16px] text-text app-no-drag";
+var field = "rounded-lg border border-separator bg-field px-2.5 py-1.5 text-text app-no-drag";
 var surfaceField = "w-full rounded-lg border border-separator bg-field px-3 py-2.5 text-[15px] text-text";
 function mergeFieldClasses(variant, className, rootClass) {
   const result = cn(rootClass, variant === "control" ? field : variant === "surface" ? surfaceField : void 0, className);
   return result === "" ? void 0 : result;
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/forms/Input.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/forms/Input.js
 function Input({ ref, variant = "control", type, className, ...props }) {
   const resolvedVariant = type === "checkbox" || type === "radio" ? "plain" : variant;
   return jsx("input", { ref, type, className: mergeFieldClasses(resolvedVariant, className, "hc-input"), ...props });
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/runtime/react-dom.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/runtime/react-dom.js
 function createPortal(children, container, key) {
   return requireHostReactDom().createPortal(children, container, key);
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/portalToBody.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/portalToBody.js
 function portalToBody(node) {
   if (typeof document === "undefined") {
     throw new Error("portalToBody requires a DOM document");
@@ -3572,7 +3590,7 @@ function portalToBody(node) {
   return createPortal(node, document.body);
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/Autocomplete/SuggestionList.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/Autocomplete/SuggestionList.js
 function getPopupPosition(anchor) {
   if (!anchor) {
     return null;
@@ -3630,7 +3648,7 @@ function SuggestionList({ open, items, activeIndex, anchorRef, listboxId, onSele
   }, children: item }, item)) }));
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/Autocomplete/useAutocomplete.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/Autocomplete/useAutocomplete.js
 function filterAutocompleteItems(items, value) {
   const trimmed = (value ?? "").trim();
   const lower = trimmed.toLowerCase();
@@ -3816,7 +3834,12 @@ function useAutocomplete({ source, value, onSelect, anchorRef: externalAnchorRef
   };
 }
 
-// node_modules/.pnpm/@fortawesome+free-solid-svg-icons@7.3.0/node_modules/@fortawesome/free-solid-svg-icons/index.mjs
+// node_modules/.pnpm/@fortawesome+free-solid-svg-icons@7.3.1/node_modules/@fortawesome/free-solid-svg-icons/index.mjs
+var faXmark = {
+  prefix: "fas",
+  iconName: "xmark",
+  icon: [384, 512, [128473, 10005, 10006, 10060, 215, "close", "multiply", "remove", "times"], "f00d", "M55.1 73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L147.2 256 9.9 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192.5 301.3 329.9 438.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.8 256 375.1 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192.5 210.7 55.1 73.4z"]
+};
 var faCircleCheck = {
   prefix: "fas",
   iconName: "circle-check",
@@ -3828,7 +3851,7 @@ var faCopy = {
   icon: [448, 512, [], "f0c5", "M192 0c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-200.6c0-17.4-7.1-34.1-19.7-46.2L370.6 17.8C358.7 6.4 342.8 0 326.3 0L192 0zM64 128c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l192 0c35.3 0 64-28.7 64-64l0-16-64 0 0 16-192 0 0-256 16 0 0-64-16 0z"]
 };
 
-// node_modules/.pnpm/@fortawesome+fontawesome-svg-core@7.3.0/node_modules/@fortawesome/fontawesome-svg-core/index.mjs
+// node_modules/.pnpm/@fortawesome+fontawesome-svg-core@7.3.1/node_modules/@fortawesome/fontawesome-svg-core/index.mjs
 function _arrayLikeToArray(r5, a3) {
   (null == a3 || a3 > r5.length) && (a3 = r5.length);
   for (var e4 = 0, n3 = Array(a3); e4 < a3; e4++) n3[e4] = r5[e4];
@@ -6079,7 +6102,7 @@ var p$2 = config.measurePerformance && PERFORMANCE && PERFORMANCE.mark && PERFOR
   mark: noop$1,
   measure: noop$1
 };
-var preamble = 'FA "7.3.0"';
+var preamble = 'FA "7.3.1"';
 var begin = function begin2(name) {
   p$2.mark("".concat(preamble, " ").concat(name, " begins"));
   return function() {
@@ -7269,7 +7292,7 @@ var layer = api.layer;
 var text = api.text;
 var counter = api.counter;
 
-// node_modules/.pnpm/@fortawesome+react-fontawesome@3.3.1_@fortawesome+fontawesome-svg-core@7.3.0_react@19.2.7/node_modules/@fortawesome/react-fontawesome/dist/index.js
+// node_modules/.pnpm/@fortawesome+react-fontawesome@3.5.0_@fortawesome+fontawesome-svg-core@7.3.1_react@19.2.7/node_modules/@fortawesome/react-fontawesome/dist/index.js
 function _isNumerical(object) {
   object = object - 0;
   return object === object;
@@ -7463,7 +7486,17 @@ var ANIMATION_CLASSES = {
   spin: "fa-spin",
   spinPulse: "fa-spin-pulse",
   spinReverse: "fa-spin-reverse",
-  pulse: "fa-pulse"
+  pulse: "fa-pulse",
+  // the following animations are only supported in version 7.3.0 and later
+  flip360: "fa-flip-360",
+  buzz: "fa-buzz",
+  float: "fa-float",
+  jello: "fa-jello",
+  spinSnap: "fa-spin-snap",
+  spinSnap4: "fa-spin-snap-4",
+  spinSnap8: "fa-spin-snap-8",
+  swing: "fa-swing",
+  wag: "fa-wag"
 };
 var PULL_CLASSES = {
   left: "fa-pull-left",
@@ -7502,7 +7535,10 @@ var STYLE_CLASSES = {
   inverse: "fa-inverse",
   rotateBy: "fa-rotate-by",
   swapOpacity: "fa-swap-opacity",
-  widthAuto: "fa-width-auto"
+  widthAuto: "fa-width-auto",
+  // the following style classes are only supported in version 7.3.0 and later
+  canvasSquare: "fa-canvas-square",
+  canvasRoomy: "fa-canvas-roomy"
 };
 var LAYER_CLASSES = {
   default: "fa-layers"
@@ -7535,6 +7571,17 @@ function getClassListFromProps(props) {
     swapOpacity,
     rotateBy,
     widthAuto,
+    canvasSquare,
+    canvasRoomy,
+    flip360,
+    buzz,
+    float,
+    jello,
+    spinSnap,
+    spinSnap4,
+    spinSnap8,
+    swing,
+    wag,
     className
   } = props;
   const result = [];
@@ -7567,6 +7614,17 @@ function getClassListFromProps(props) {
   if (!getIsVersion7OrLater()) return result;
   if (rotateBy) result.push(STYLE_CLASSES.rotateBy);
   if (widthAuto) result.push(STYLE_CLASSES.widthAuto);
+  if (canvasSquare) result.push(STYLE_CLASSES.canvasSquare);
+  if (canvasRoomy) result.push(STYLE_CLASSES.canvasRoomy);
+  if (flip360) result.push(ANIMATION_CLASSES.flip360);
+  if (buzz) result.push(ANIMATION_CLASSES.buzz);
+  if (float) result.push(ANIMATION_CLASSES.float);
+  if (jello) result.push(ANIMATION_CLASSES.jello);
+  if (spinSnap) result.push(ANIMATION_CLASSES.spinSnap);
+  if (spinSnap4) result.push(ANIMATION_CLASSES.spinSnap4);
+  if (spinSnap8) result.push(ANIMATION_CLASSES.spinSnap8);
+  if (swing) result.push(ANIMATION_CLASSES.swing);
+  if (wag) result.push(ANIMATION_CLASSES.wag);
   const prefix = config$1.cssPrefix || config$1.familyPrefix || DEFAULT_CLASSNAME_PREFIX;
   return prefix === DEFAULT_CLASSNAME_PREFIX ? result : (
     // TODO: see if we can achieve custom prefix support without iterating
@@ -7616,7 +7674,18 @@ var DEFAULT_PROPS = {
   titleId: void 0,
   transform: void 0,
   swapOpacity: false,
-  widthAuto: false
+  widthAuto: false,
+  canvasSquare: false,
+  canvasRoomy: false,
+  flip360: false,
+  buzz: false,
+  float: false,
+  jello: false,
+  spinSnap: false,
+  spinSnap4: false,
+  spinSnap8: false,
+  swing: false,
+  wag: false
 };
 var DEFAULT_PROP_KEYS = new Set(Object.keys(DEFAULT_PROPS));
 var FontAwesomeIcon = react_default.forwardRef((props, ref) => {
@@ -7666,7 +7735,7 @@ var FontAwesomeIcon = react_default.forwardRef((props, ref) => {
 FontAwesomeIcon.displayName = "FontAwesomeIcon";
 var DEFAULT_CLASSNAMES = `${LAYER_CLASSES.default} ${STYLE_CLASSES.fixedWidth}`;
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/FaIcon/index.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/FaIcon/index.js
 function FaIcon({ icon: icon3, className = "h-3.5 w-3.5", title, ...props }) {
   return createElement(FontAwesomeIcon, {
     ...props,
@@ -9559,7 +9628,7 @@ var e3 = { airline: { airline: [{ name: `Aegean Airlines`, iataCode: `A3` }, { n
 // node_modules/.pnpm/@faker-js+faker@10.5.0/node_modules/@faker-js/faker/dist/locale/en.js
 var r4 = new yt({ locale: [e3, Ct] });
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/variables/dynamic.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/variables/dynamic.js
 function categoryImageUrl(category) {
   return r4.image.urlLoremFlickr({ category });
 }
@@ -10066,7 +10135,7 @@ function resolveDynamicVariable(key) {
 }
 var DYNAMIC_VARIABLE_NAMES = Object.keys(DYNAMIC_VARIABLES).sort();
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/variables/filters.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/variables/filters.js
 var FILTERS = {
   upper: (value) => value.toUpperCase(),
   lower: (value) => value.toLowerCase(),
@@ -10101,7 +10170,7 @@ function applyFilters(value, filters) {
   return current;
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/variables/tokens.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/variables/tokens.js
 var VARIABLE_NAME_CHARS = "\\w$.-";
 var VARIABLE_TOKEN_PATTERN = new RegExp(`\\{\\{\\s*([${VARIABLE_NAME_CHARS}]+)(\\s*\\|\\s*[${VARIABLE_NAME_CHARS}]+)*\\s*\\}\\}`, "g");
 var VALID_NAME_PATTERN = new RegExp(`^[${VARIABLE_NAME_CHARS}]+$`);
@@ -10246,8 +10315,8 @@ function substituteVariablesFromMap(text2, runtimeVars) {
   return substituteWithResolver(text2, (key) => runtimeVars[key]);
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/VariableTooltip/VariableTooltipValue.js
-function VariableTooltipValue({ value, variableKey, muted }) {
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/VariableTooltip/VariableTooltipValue.js
+function VariableTooltipValue({ value, variableKey, muted, onClose }) {
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
     void navigator.clipboard.writeText(value).then(() => {
@@ -10257,20 +10326,54 @@ function VariableTooltipValue({ value, variableKey, muted }) {
   };
   return jsxs("div", { className: "hc-variable-tooltip-value-row flex items-center gap-1.5", children: [jsx(Input, { readOnly: true, value, "aria-label": `Resolved value for ${variableKey}`, className: cn("min-w-0 flex-1", muted && "text-muted") }), jsx(Button, { type: "button", variant: "icon", "aria-label": copied ? `Copied value for ${variableKey}` : `Copy value for ${variableKey}`, onMouseDown: (event) => {
     event.preventDefault();
-  }, onClick: handleCopy, children: jsx(FaIcon, { icon: copied ? faCircleCheck : faCopy, className: "h-4 w-4" }) })] });
+  }, onClick: handleCopy, children: jsx(FaIcon, { icon: copied ? faCircleCheck : faCopy, className: "h-4 w-4" }) }), onClose && jsx(Button, { type: "button", variant: "icon", className: "hc-variable-tooltip-close", "aria-label": `Close tooltip for ${variableKey}`, onMouseDown: (event) => {
+    event.preventDefault();
+  }, onClick: onClose, children: jsx(FaIcon, { icon: faXmark, className: "h-4 w-4" }) })] });
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/VariableInput/index.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/useDialogFocus.js
+var FOCUSABLE_SELECTOR = 'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+function isFocusableVisible(element) {
+  if (element.closest('[aria-hidden="true"]')) {
+    return false;
+  }
+  if (element.offsetParent !== null || getComputedStyle(element).position === "fixed") {
+    return true;
+  }
+  let parent = element.parentElement;
+  while (parent) {
+    if (getComputedStyle(parent).position === "fixed") {
+      return true;
+    }
+    parent = parent.parentElement;
+  }
+  return false;
+}
+function getFocusableElements(container) {
+  const candidates = Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR));
+  return candidates.filter(isFocusableVisible);
+}
+
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/VariableInput/index.js
 var TOOLTIP_SHOW_DELAY_MS = 500;
 var TOOLTIP_HIDE_DELAY_MS = 400;
 function VariableInput({ value, onChange: onChange2, variables, placeholder, onKeyDown, className = "", wrapperClassName, onEditVariable, id, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, source, ...props }) {
   const safeValue = value ?? "";
+  const wrapperRef = useRef(null);
   const inputRef = useRef(null);
   const backdropRef = useRef(null);
-  const spanRefs = useRef(/* @__PURE__ */ new Map());
+  const tokenButtonRefs = useRef(/* @__PURE__ */ new Map());
+  const tooltipRef = useRef(null);
   const hideTimer = useRef(null);
   const showTimer = useRef(null);
+  const suppressReopen = useRef(false);
+  const pendingEnterFocus = useRef(false);
+  const tooltipEntered = useRef(false);
+  const tooltipSourceRef = useRef(null);
+  const activeTokenIndexRef = useRef(null);
   const [tooltip, setTooltip] = useState(null);
+  const [tooltipSource, setTooltipSource] = useState(null);
+  const [activeTokenIndex, setActiveTokenIndex] = useState(null);
   const tooltipId = useId();
   const { open: autocompleteOpen, items: autocompleteItems, activeIndex: autocompleteActiveIndex, listboxId, onFocus: openAutocomplete, onBlur: closeAutocomplete, onInputKeyDown, selectItem, setActiveIndex, closeSuggestions } = useAutocomplete({
     source,
@@ -10279,15 +10382,51 @@ function VariableInput({ value, onChange: onChange2, variables, placeholder, onK
     anchorRef: inputRef
   });
   const tokens = useMemo(() => tokenizeVariables(safeValue), [safeValue]);
+  useEffect(() => {
+    tooltipSourceRef.current = tooltipSource;
+    activeTokenIndexRef.current = activeTokenIndex;
+  }, [tooltipSource, activeTokenIndex]);
   const cancelHide = () => {
     if (hideTimer.current != null) {
       window.clearTimeout(hideTimer.current);
       hideTimer.current = null;
     }
   };
+  const dismissTooltip = () => {
+    pendingEnterFocus.current = false;
+    tooltipEntered.current = false;
+    setTooltip(null);
+    setTooltipSource(null);
+    setActiveTokenIndex(null);
+  };
+  const dismissFocusTooltip = (refocusToken = false) => {
+    const index = activeTokenIndexRef.current;
+    dismissTooltip();
+    if (refocusToken && index != null) {
+      suppressReopen.current = true;
+      tokenButtonRefs.current.get(index)?.focus();
+    }
+  };
+  const focusFirstTooltipControl = () => {
+    const tooltipEl = tooltipRef.current;
+    if (!tooltipEl) {
+      return;
+    }
+    getFocusableElements(tooltipEl)[0]?.focus();
+    tooltipEntered.current = true;
+  };
   const scheduleHide = () => {
+    if (tooltipSourceRef.current === "focus") {
+      return;
+    }
     cancelHide();
-    hideTimer.current = window.setTimeout(() => setTooltip(null), TOOLTIP_HIDE_DELAY_MS);
+    hideTimer.current = window.setTimeout(() => {
+      hideTimer.current = null;
+      if (tooltipSourceRef.current === "focus") {
+        return;
+      }
+      dismissTooltip();
+    }, TOOLTIP_HIDE_DELAY_MS);
   };
   const cancelShow = () => {
     if (showTimer.current != null) {
@@ -10295,7 +10434,7 @@ function VariableInput({ value, onChange: onChange2, variables, placeholder, onK
       showTimer.current = null;
     }
   };
-  const showTooltipForKey = (key, top, left) => {
+  const showTooltipForKey = (key, top, left, source2, tokenIndex = null) => {
     setTooltip({
       key,
       value: resolveVariable(key, variables),
@@ -10303,18 +10442,62 @@ function VariableInput({ value, onChange: onChange2, variables, placeholder, onK
       top,
       left
     });
+    setTooltipSource(source2);
+    setActiveTokenIndex(tokenIndex);
   };
   const scheduleShow = (key, top, left) => {
     cancelShow();
     showTimer.current = window.setTimeout(() => {
       showTimer.current = null;
-      showTooltipForKey(key, top, left);
+      showTooltipForKey(key, top, left, "hover", null);
     }, TOOLTIP_SHOW_DELAY_MS);
   };
   useEffect(() => () => {
     cancelHide();
     cancelShow();
   }, []);
+  useEffect(() => {
+    if (tooltipSource !== "focus" || activeTokenIndex == null || !tooltip) {
+      return;
+    }
+    const handleKeyDown2 = (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        dismissFocusTooltip(true);
+        return;
+      }
+      if (event.key !== "Tab" || !tooltipEntered.current) {
+        return;
+      }
+      const tooltipEl = tooltipRef.current;
+      if (!tooltipEl) {
+        return;
+      }
+      const controls = getFocusableElements(tooltipEl);
+      if (controls.length === 0) {
+        event.preventDefault();
+        return;
+      }
+      event.preventDefault();
+      const active = document.activeElement;
+      const index = active ? controls.indexOf(active) : -1;
+      if (index === -1) {
+        controls[0].focus();
+        return;
+      }
+      const nextIndex = event.shiftKey ? (index - 1 + controls.length) % controls.length : (index + 1) % controls.length;
+      controls[nextIndex]?.focus();
+    };
+    document.addEventListener("keydown", handleKeyDown2);
+    return () => document.removeEventListener("keydown", handleKeyDown2);
+  }, [tooltipSource, activeTokenIndex, tooltip]);
+  useEffect(() => {
+    if (!pendingEnterFocus.current || tooltipSource !== "focus" || !tooltip) {
+      return;
+    }
+    pendingEnterFocus.current = false;
+    focusFirstTooltipControl();
+  }, [tooltip, tooltipSource]);
   const syncScroll = () => {
     const input = inputRef.current;
     const backdrop = backdropRef.current;
@@ -10323,13 +10506,22 @@ function VariableInput({ value, onChange: onChange2, variables, placeholder, onK
     }
   };
   const updateTooltipFromCaret = () => {
+    if (tooltipSourceRef.current === "focus") {
+      return;
+    }
     const input = inputRef.current;
     if (!input)
       return;
-    const offset = input.selectionStart ?? 0;
+    const selectionStart = input.selectionStart ?? 0;
+    const selectionEnd = input.selectionEnd ?? 0;
+    if (selectionStart !== selectionEnd) {
+      dismissTooltip();
+      return;
+    }
+    const offset = selectionStart;
     const match = getVariableTokenAtOffset(safeValue, offset);
     if (!match) {
-      setTooltip(null);
+      dismissTooltip();
       return;
     }
     let tokenIndex = -1;
@@ -10341,24 +10533,64 @@ function VariableInput({ value, onChange: onChange2, variables, placeholder, onK
       }
       position += token.text.length;
     }
-    const span = tokenIndex >= 0 ? spanRefs.current.get(tokenIndex) : void 0;
-    if (span) {
-      const rect2 = span.getBoundingClientRect();
-      showTooltipForKey(match.key, rect2.top, rect2.left + rect2.width / 2);
+    const tokenButton = tokenIndex >= 0 ? tokenButtonRefs.current.get(tokenIndex) : void 0;
+    if (tokenButton) {
+      const rect2 = tokenButton.getBoundingClientRect();
+      showTooltipForKey(match.key, rect2.top, rect2.left + rect2.width / 2, "hover", null);
       return;
     }
     const rect = input.getBoundingClientRect();
-    showTooltipForKey(match.key, rect.top, rect.left + rect.width / 2);
+    showTooltipForKey(match.key, rect.top, rect.left + rect.width / 2, "hover", null);
+  };
+  const handleTokenFocus = (index, key, button) => {
+    if (suppressReopen.current) {
+      suppressReopen.current = false;
+      return;
+    }
+    cancelHide();
+    cancelShow();
+    tooltipEntered.current = false;
+    const rect = button.getBoundingClientRect();
+    showTooltipForKey(key, rect.top, rect.left + rect.width / 2, "focus", index);
+  };
+  const handleTokenKeyDown = (event, index, key) => {
+    if (event.key === "Escape" && tooltipSource === "focus" && activeTokenIndex != null) {
+      event.preventDefault();
+      event.stopPropagation();
+      dismissFocusTooltip(false);
+      return;
+    }
+    if (event.key !== "Enter") {
+      return;
+    }
+    event.preventDefault();
+    if (tooltipSource === "focus" && activeTokenIndex === index && tooltipRef.current) {
+      focusFirstTooltipControl();
+      return;
+    }
+    pendingEnterFocus.current = true;
+    const button = tokenButtonRefs.current.get(index);
+    if (!button) {
+      pendingEnterFocus.current = false;
+      return;
+    }
+    cancelHide();
+    cancelShow();
+    const rect = button.getBoundingClientRect();
+    showTooltipForKey(key, rect.top, rect.left + rect.width / 2, "focus", index);
   };
   const handleMouseMove = (e4) => {
+    if (tooltipSourceRef.current === "focus") {
+      return;
+    }
     cancelHide();
     for (const [index, token] of tokens.entries()) {
       if (!token.key)
         continue;
-      const span = spanRefs.current.get(index);
-      if (!span)
+      const tokenButton = tokenButtonRefs.current.get(index);
+      if (!tokenButton)
         continue;
-      const rect = span.getBoundingClientRect();
+      const rect = tokenButton.getBoundingClientRect();
       if (e4.clientX >= rect.left && e4.clientX <= rect.right && e4.clientY >= rect.top && e4.clientY <= rect.bottom) {
         scheduleShow(token.key, rect.top, rect.left + rect.width / 2);
         return;
@@ -10368,16 +10600,32 @@ function VariableInput({ value, onChange: onChange2, variables, placeholder, onK
     scheduleHide();
   };
   const handleMouseLeave = () => {
+    if (tooltipSourceRef.current === "focus") {
+      return;
+    }
     cancelShow();
     scheduleHide();
+  };
+  const handleWrapperBlur = () => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper) {
+      return;
+    }
+    queueMicrotask(() => {
+      if (!wrapper.contains(document.activeElement)) {
+        cancelHide();
+        cancelShow();
+        dismissTooltip();
+      }
+    });
   };
   const handleKeyDown = (event) => {
     if (onInputKeyDown(event)) {
       return;
     }
-    if (event.key === "Escape" && tooltip) {
+    if (event.key === "Escape" && tooltip && tooltipSource !== "focus") {
       event.preventDefault();
-      setTooltip(null);
+      dismissTooltip();
       return;
     }
     onKeyDown?.(event);
@@ -10388,24 +10636,37 @@ function VariableInput({ value, onChange: onChange2, variables, placeholder, onK
     }
   };
   const tooltipContent = tooltip ? getVariableTooltipContent(tooltip.key, variables) : null;
-  return jsxs("div", { ...props, className: cn("hc-variable-input relative min-w-0", wrapperClassName ?? "flex-1"), children: [jsx("div", { ref: backdropRef, "aria-hidden": true, className: "hc-variable-input-backdrop pointer-events-none absolute inset-0 overflow-hidden px-2.5 py-1.5 text-[16px] whitespace-nowrap text-inherit", children: safeValue ? tokens.map((token, index) => token.key ? jsx("span", { ref: (el) => {
+  const focusTooltipOpen = tooltipSource === "focus" && tooltip != null;
+  return jsxs("div", { ...props, ref: wrapperRef, className: cn("hc-variable-input relative min-w-0", wrapperClassName ?? "flex-1"), onBlurCapture: handleWrapperBlur, children: [jsx("div", { ref: backdropRef, className: "hc-variable-input-backdrop pointer-events-none absolute inset-0 overflow-hidden px-2.5 py-1.5 whitespace-nowrap text-inherit", children: safeValue ? tokens.map((token, index) => token.key ? jsx("button", { type: "button", ref: (el) => {
     if (el)
-      spanRefs.current.set(index, el);
+      tokenButtonRefs.current.set(index, el);
     else
-      spanRefs.current.delete(index);
-  }, className: "hc-variable-input-token hc-variable-input-token-variable text-[#32D2E2]", children: token.text }, index) : jsx("span", { className: "hc-variable-input-token", children: token.text }, index)) : jsx("span", { className: "hc-variable-input-placeholder text-muted", children: placeholder }) }), jsx(Input, { ref: inputRef, id, variant: "plain", role: source ? "combobox" : void 0, "aria-autocomplete": source ? "list" : void 0, "aria-expanded": source ? autocompleteOpen : void 0, "aria-controls": source && autocompleteOpen ? listboxId : void 0, "aria-activedescendant": source && autocompleteOpen && autocompleteActiveIndex >= 0 ? `${listboxId}-option-${autocompleteActiveIndex}` : void 0, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, "aria-describedby": tooltip ? tooltipId : void 0, className: cn("hc-variable-input-field relative w-full min-w-0 border-none bg-transparent px-2.5 py-1.5 text-[16px] text-transparent caret-text focus-visible:shadow-none", className), type: "text", placeholder, value: safeValue, onChange: (e4) => {
+      tokenButtonRefs.current.delete(index);
+  }, tabIndex: 0, "aria-label": `Variable ${token.key}`, "aria-expanded": focusTooltipOpen && activeTokenIndex === index ? true : void 0, "aria-describedby": focusTooltipOpen && activeTokenIndex === index ? tooltipId : void 0, className: cn("hc-variable-input-token hc-variable-input-token-variable font-inherit inline border-none bg-transparent p-0 text-[#32D2E2] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent"), onFocus: (event) => handleTokenFocus(index, token.key, event.currentTarget), onKeyDown: (event) => handleTokenKeyDown(event, index, token.key), children: token.text }, `${index}-${token.text}`) : jsx("span", { "aria-hidden": true, className: "hc-variable-input-token", children: token.text }, `${index}-${token.text}`)) : jsx("span", { "aria-hidden": true, className: "hc-variable-input-placeholder text-muted", children: placeholder }) }), jsx(Input, { ref: inputRef, id, variant: "plain", role: source ? "combobox" : void 0, "aria-autocomplete": source ? "list" : void 0, "aria-expanded": source ? autocompleteOpen : void 0, "aria-controls": source && autocompleteOpen ? listboxId : void 0, "aria-activedescendant": source && autocompleteOpen && autocompleteActiveIndex >= 0 ? `${listboxId}-option-${autocompleteActiveIndex}` : void 0, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, "aria-describedby": tooltip && tooltipSource !== "focus" ? tooltipId : void 0, className: cn("hc-variable-input-field relative w-full min-w-0 border-none bg-transparent px-2.5 py-1.5 text-transparent caret-text focus-visible:shadow-none", className), type: "text", placeholder, value: safeValue, onChange: (e4) => {
     onChange2(e4.target.value);
     queueMicrotask(updateTooltipFromCaret);
   }, onFocus: () => {
+    if (tooltipSourceRef.current === "focus") {
+      dismissTooltip();
+    }
     openAutocomplete();
-    updateTooltipFromCaret();
-  }, onBlur: closeAutocomplete, onKeyDown: handleKeyDown, onKeyUp: handleKeyUp, onSelect: updateTooltipFromCaret, onClick: updateTooltipFromCaret, onScroll: syncScroll, onMouseMove: handleMouseMove, onMouseLeave: handleMouseLeave }), source && jsx(SuggestionList, { open: autocompleteOpen, items: autocompleteItems, activeIndex: autocompleteActiveIndex, anchorRef: inputRef, listboxId, onSelect: selectItem, onActiveIndexChange: setActiveIndex, onClose: closeSuggestions }), tooltip && tooltipContent && jsxs("div", { id: tooltipId, role: "tooltip", className: "hc-variable-input-tooltip pointer-events-auto fixed z-50 flex max-w-sm -translate-x-1/2 -translate-y-full flex-col gap-2 rounded-lg border border-separator bg-surface px-4 py-3 text-[16px] text-text shadow-md after:pointer-events-auto after:absolute after:right-0 after:-bottom-2 after:left-0 after:h-2 after:content-['']", style: { top: tooltip.top - 4, left: tooltip.left }, onMouseEnter: cancelHide, onMouseLeave: scheduleHide, children: [jsx(VariableTooltipValue, { value: tooltipContent.text, variableKey: tooltip.key, muted: tooltipContent.muted }), onEditVariable && jsx(Button, { variant: "secondary", className: "hc-variable-input-tooltip-edit self-start", "aria-label": `Edit value for ${tooltip.key}`, onClick: () => {
+  }, onBlur: closeAutocomplete, onKeyDown: handleKeyDown, onKeyUp: handleKeyUp, onSelect: updateTooltipFromCaret, onClick: updateTooltipFromCaret, onScroll: syncScroll, onMouseMove: handleMouseMove, onMouseLeave: handleMouseLeave }), source && jsx(SuggestionList, { open: autocompleteOpen, items: autocompleteItems, activeIndex: autocompleteActiveIndex, anchorRef: inputRef, listboxId, onSelect: selectItem, onActiveIndexChange: setActiveIndex, onClose: closeSuggestions }), tooltip && tooltipContent && jsxs("div", { ref: tooltipRef, id: tooltipId, role: "tooltip", className: "hc-variable-input-tooltip pointer-events-auto fixed z-50 flex max-w-sm -translate-x-1/2 -translate-y-full flex-col gap-2 rounded-lg border border-separator bg-surface px-4 py-3 text-text shadow-md after:pointer-events-auto after:absolute after:right-0 after:-bottom-2 after:left-0 after:h-2 after:content-['']", style: { position: "fixed", top: tooltip.top - 4, left: tooltip.left }, onMouseEnter: cancelHide, onMouseLeave: scheduleHide, children: [jsx(VariableTooltipValue, { value: tooltipContent.text, variableKey: tooltip.key, muted: tooltipContent.muted, onClose: () => {
+    if (tooltipSource === "focus") {
+      dismissFocusTooltip(true);
+    } else {
+      dismissTooltip();
+    }
+  } }), onEditVariable && jsx(Button, { variant: "secondary", className: "hc-variable-input-tooltip-edit self-start", "aria-label": `Edit value for ${tooltip.key}`, onClick: () => {
     onEditVariable(tooltip.key);
-    setTooltip(null);
+    if (tooltipSource === "focus") {
+      dismissFocusTooltip(true);
+    } else {
+      dismissTooltip();
+    }
   }, children: "Edit value" })] })] });
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/enhanceControl.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/enhanceControl.js
 var REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
 var FORM_CONTROL_TAGS = /* @__PURE__ */ new Set(["button", "input", "select", "textarea"]);
 function getSingleChild(node) {
@@ -10467,7 +10728,12 @@ function enhanceControl(child, options) {
   return applyAriaProps(child, options);
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/FormGroup/index.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/FormGroup/index.js
+function borderedWrapperClasses(bordered, layoutClasses, extra) {
+  const frame = bordered ? "p-4 border border-separator rounded-md" : "";
+  const base = `hc-form-group ${layoutClasses} ${frame}`.trim();
+  return extra ? `${base} ${extra}` : base;
+}
 function labelClasses(tone, srOnly, inline) {
   const base = "hc-form-group-label text-[18px]";
   const visibility = srOnly ? "sr-only" : "";
@@ -10478,22 +10744,22 @@ function labelClasses(tone, srOnly, inline) {
   const color = tone === "muted" ? "text-muted" : "font-medium text-text";
   return `${base} ${color} ${visibility}`.trim();
 }
-function FormGroup({ label, children, htmlFor, description, error, errorId, descriptionId, layout = "stacked", labelTone = "default", srOnly = false, className, labelClassName, ...props }) {
+function FormGroup({ label, children, htmlFor, description, error, errorId, descriptionId, layout = "stacked", labelTone = "default", srOnly = false, className, labelClassName, bordered = true, ...props }) {
   const generatedId = useId();
   const controlId = htmlFor ?? generatedId;
   const extra = className ?? "";
   if (layout === "associated") {
-    const associatedClasses = labelClassName ? `hc-form-group ${labelClassName}` : "hc-form-group text-[16px] text-text";
+    const associatedClasses = labelClassName ? `hc-form-group ${labelClassName}` : "hc-form-group text-text";
     return jsx("label", { htmlFor, className: associatedClasses, children: label });
   }
   if (layout === "checkboxAdjacent") {
     const wrapperClasses2 = extra ? `hc-form-group flex items-start gap-2 ${extra}` : "hc-form-group flex items-start gap-2";
-    const adjacentLabelClasses = labelClassName ? `hc-form-group-label ${labelClassName}` : "hc-form-group-label min-w-0 flex-1 text-[16px] text-text";
+    const adjacentLabelClasses = labelClassName ? `hc-form-group-label ${labelClassName}` : "hc-form-group-label min-w-0 flex-1 text-text";
     const linkedChildren = enhanceControl(children, { id: controlId });
     return jsxs("div", { ...props, className: wrapperClasses2, children: [linkedChildren, jsx("label", { htmlFor: controlId, className: adjacentLabelClasses, children: label })] });
   }
   if (layout === "radio") {
-    const wrapperClasses2 = extra ? `hc-form-group inline-flex cursor-pointer items-center gap-1.5 text-[16px] text-text app-no-drag ${extra}` : "hc-form-group inline-flex cursor-pointer items-center gap-1.5 text-[16px] text-text app-no-drag";
+    const wrapperClasses2 = extra ? `hc-form-group inline-flex cursor-pointer items-center gap-1.5 text-text app-no-drag ${extra}` : "hc-form-group inline-flex cursor-pointer items-center gap-1.5 text-text app-no-drag";
     const linkedChildren = enhanceControl(children, { id: controlId });
     return jsxs("label", { htmlFor: controlId, className: wrapperClasses2, children: [linkedChildren, jsx("span", { className: "hc-form-group-label", children: label })] });
   }
@@ -10507,11 +10773,11 @@ function FormGroup({ label, children, htmlFor, description, error, errorId, desc
       id: controlId,
       invalid: resolvedErrorId2 != null
     });
-    const wrapperClasses2 = extra ? `hc-form-group flex flex-col gap-1 p-4 border border-separator rounded-md ${extra}` : "hc-form-group flex flex-col gap-1 p-4 border border-separator rounded-md";
+    const wrapperClasses2 = borderedWrapperClasses(bordered, "flex flex-col gap-1", extra);
     return jsxs("div", { ...props, className: wrapperClasses2, children: [jsxs("label", { htmlFor: controlId, className: "hc-form-group-label flex flex-col gap-1", children: [jsxs("span", { className: "hc-form-group-label-row flex items-center gap-2", children: [linkedChildren, jsx("span", { className: labelClasses(labelTone, srOnly, false), children: label })] }), resolvedDescriptionId2 ? jsx("p", { id: resolvedDescriptionId2, className: "hc-form-group-description m-0 pl-[26px] text-[14px] text-muted", children: description }) : null] }), resolvedErrorId2 ? jsx(FieldError, { id: resolvedErrorId2, spacing: "field", children: error }) : null] });
   }
   if (layout === "inline") {
-    const wrapperClasses2 = extra ? `hc-form-group flex min-w-0 flex-1 items-center gap-2 p-4 border border-separator rounded-md ${extra}` : "hc-form-group flex min-w-0 flex-1 items-center gap-2 p-4 border border-separator rounded-md";
+    const wrapperClasses2 = borderedWrapperClasses(bordered, "flex min-w-0 flex-1 items-center gap-2", extra);
     const linkedChildren = enhanceControl(children, { id: controlId });
     return jsxs("label", { htmlFor: controlId, className: wrapperClasses2, children: [jsx("span", { className: labelClasses(labelTone, srOnly, true), children: label }), linkedChildren] });
   }
@@ -10524,16 +10790,16 @@ function FormGroup({ label, children, htmlFor, description, error, errorId, desc
     invalid: resolvedErrorId != null,
     id: htmlFor
   });
-  const wrapperClasses = extra ? `hc-form-group flex flex-col gap-1 p-4 text-[16px] border border-separator rounded-md ${extra}` : "hc-form-group flex flex-col gap-1 p-4 text-[16px] border border-separator rounded-md";
+  const wrapperClasses = borderedWrapperClasses(bordered, "flex flex-col gap-1", extra);
   return jsxs("div", { ...props, className: wrapperClasses, children: [jsxs("label", { htmlFor, className: "hc-form-group-label flex flex-col gap-1", children: [jsx("span", { className: labelClasses(labelTone, srOnly, false), children: label }), resolvedDescriptionId ? jsx("p", { id: resolvedDescriptionId, className: "hc-form-group-description m-0 text-[14px] text-muted", children: description }) : null, control] }), resolvedErrorId ? jsx(FieldError, { id: resolvedErrorId, spacing: "field", children: error }) : null] });
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/components/StatusMessage/index.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/components/StatusMessage/index.js
 function StatusMessage({ children, live = true, className, ...props }) {
   return jsx("p", { ...props, className: cn("hc-status-message text-[14px] text-muted", className), role: live ? "status" : void 0, "aria-live": live ? "polite" : void 0, children });
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/http/substitute.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/http/substitute.js
 function substituteVariables2(text2, runtimeVars) {
   return substituteVariablesFromMap(text2, runtimeVars);
 }
@@ -10566,7 +10832,7 @@ function resolveOptionalPositiveInt(raw, variables) {
   return resolvePositiveInt(trimmed, variables);
 }
 
-// node_modules/.pnpm/@harborclient+sdk@1.0.67_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_3c89fa62c09d96ae3e3b559a96baacfd/node_modules/@harborclient/sdk/dist/storage/validate.js
+// node_modules/.pnpm/@harborclient+sdk@1.1.30_@babel+runtime@8.0.0_@codemirror+search@6.7.1_@codemirror+them_f5a921e594ac8a9fdb35874fc7795fe3/node_modules/@harborclient/sdk/dist/storage/validate.js
 function isRecord(value) {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -10853,22 +11119,18 @@ function TimerTab({ context, hc }) {
 
 // src/renderer.tsx
 function activate(hc) {
-  hc.subscriptions.push(
-    hc.ui.registerRequestTab({
-      id: "timer",
-      title: "Timer",
-      order: 50,
-      Component: ({ context }) => /* @__PURE__ */ jsx(TimerTab, { context, hc })
-    })
-  );
-  hc.subscriptions.push(
-    hc.ui.registerStatusBarItem({
-      id: "timer-active",
-      alignment: "right",
-      order: 50,
-      Component: TimerStatusBar
-    })
-  );
+  hc.ui.registerRequestTab({
+    id: "timer",
+    title: "Timer",
+    order: 50,
+    Component: ({ context }) => /* @__PURE__ */ jsx(TimerTab, { context, hc })
+  });
+  hc.ui.registerStatusBarItem({
+    id: "timer-active",
+    alignment: "right",
+    order: 50,
+    Component: TimerStatusBar
+  });
 }
 function deactivate() {
   clearAllTimers();
@@ -10882,7 +11144,7 @@ export {
 @fortawesome/free-solid-svg-icons/index.mjs:
 @fortawesome/fontawesome-svg-core/index.mjs:
   (*!
-   * Font Awesome Free 7.3.0 by @fontawesome - https://fontawesome.com
+   * Font Awesome Free 7.3.1 by @fontawesome - https://fontawesome.com
    * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
    * Copyright 2026 Fonticons, Inc.
    *)
