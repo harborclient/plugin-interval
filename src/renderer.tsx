@@ -9,23 +9,19 @@ import { clearAllTimers } from './timerRuntime';
  * @param hc - Plugin API surface from HarborClient.
  */
 export function activate(hc: PluginContext): void {
-  hc.subscriptions.push(
-    hc.ui.registerRequestTab({
-      id: 'timer',
-      title: 'Timer',
-      order: 50,
-      Component: ({ context }) => <TimerTab context={context} hc={hc} />
-    })
-  );
+  hc.ui.registerRequestTab({
+    id: 'timer',
+    title: 'Timer',
+    order: 50,
+    Component: ({ context }) => <TimerTab context={context} hc={hc} />
+  });
 
-  hc.subscriptions.push(
-    hc.ui.registerStatusBarItem({
-      id: 'timer-active',
-      alignment: 'right',
-      order: 50,
-      Component: TimerStatusBar
-    })
-  );
+  hc.ui.registerStatusBarItem({
+    id: 'timer-active',
+    alignment: 'right',
+    order: 50,
+    Component: TimerStatusBar
+  });
 }
 
 /**
